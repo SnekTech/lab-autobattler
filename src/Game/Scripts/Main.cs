@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace GameTemplate;
+namespace LabAutobattler;
 
 public partial class Main: Node2D
 {

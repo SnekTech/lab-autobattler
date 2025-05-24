@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="godot-pixel-art-template"
+config/name="LabAutobattler"
 run/main_scene="uid://ddeqm380rgljy"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="uid://bdohtig5mdd7l"
+config/icon="uid://b8bu3rveu5a74"
 
 [display]
 
@@ -21,7 +21,7 @@ window/stretch/mode="viewport"
 
 [dotnet]
 
-project/assembly_name="GameTemplate"
+project/assembly_name="LabAutobattler"
 project/solution_directory="../.."
 
 [editor]

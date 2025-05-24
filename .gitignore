@@ -13,3 +13,6 @@ obj/
 
 **/.idea
 AssetsRaw/
+
+# assets too big to push remote
+assets/
