@@ -16,3 +16,5 @@ AssetsRaw/
 
 # assets too big to push remote
 assets/
+
+*.DotSettings.user
