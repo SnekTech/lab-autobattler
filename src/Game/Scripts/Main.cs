@@ -2,7 +2,7 @@
 
 namespace LabAutobattler;
 
-public partial class Main: Node2D
+public partial class Main : Node2D
 {
     public override void _Ready()
     {
