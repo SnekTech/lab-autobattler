@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcjjsaa6442rh"]
+[gd_scene load_steps=9 format=3 uid="uid://dcjjsaa6442rh"]
 
 [ext_resource type="Texture2D" uid="uid://cx1ivjobggp8n" path="res://assets/sprites/rogues.png" id="1_aqcck"]
+[ext_resource type="Script" uid="uid://b7cv6p24bm45g" path="res://Scripts/UnitManage/Unit.cs" id="1_r1lkm"]
+[ext_resource type="Resource" uid="uid://c0111qmmqxqkl" path="res://data/units/bjorn.tres" id="2_fu56h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqcck"]
 size = Vector2(36, 36)
@@ -28,6 +30,8 @@ border_width_bottom = 1
 border_color = Color(0.231373, 0.113725, 0.0980392, 1)
 
 [node name="Unit" type="Area2D"]
+script = ExtResource("1_r1lkm")
+defaultStats = ExtResource("2_fu56h")
 
 [node name="Skin" type="Sprite2D" parent="."]
 position = Vector2(16, 8)
