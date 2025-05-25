@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://ddeqm380rgljy"]
 
-[ext_resource type="Script" uid="uid://bac43f1ymlhio" path="res://Scripts/Main.cs" id="1_ouftb"]
+[ext_resource type="Script" uid="uid://bac43f1ymlhio" path="res://Scripts/Arena.cs" id="1_ouftb"]
 [ext_resource type="TileSet" uid="uid://dgi1yfqbk2346" path="res://Scenes/arena/tileset.tres" id="2_p7aap"]
 [ext_resource type="Texture2D" uid="uid://mbxv0ayrsu3d" path="res://assets/sprites/star_particle.png" id="3_p7aap"]
 
@@ -39,6 +39,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAYAAAAAAAEAAAAAAAYAAAAAAAIAAAAAAAY
 tile_set = ExtResource("2_p7aap")
 
 [node name="Props" type="TileMapLayer" parent="Visuals"]
+modulate = Color(1, 1, 1, 0.396078)
 tile_map_data = PackedByteArray("AAAAAAEAAAAPABMAAAAAAAUAAAAPABMAAAAAAAkAAAABABIAAAABAAYAAAAPABMAAAACAAcAAAAAABIAAAACAAgAAAAJABMAAAADAAAAAAALABMAAAADAAEAAAAHABMAAAADAAoAAAAAABMAAAAEAAkAAAADABMAAAANAAkAAAAEABMAAAAQAAAAAAACABMAAAAQAAUAAAAHABMAAAARAAEAAAAKABMAAAARAAgAAAAAABIAAAARAAoAAAAFABMAAAASAAMAAAAHABMAAAASAAYAAAAHABMAAAATAAoAAAAEABMAAAA=")
 tile_set = ExtResource("2_p7aap")
 
@@ -62,6 +63,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Decor" type="TileMapLayer" parent="GameArea"]
+modulate = Color(1, 1, 1, 0.388235)
 tile_map_data = PackedByteArray("AAAGAAAAAAAAABUAAAAJAAEAAAAAABYAAAAIAAQAAAAAABYAAAADAAUAAAABABYAAAA=")
 tile_set = ExtResource("2_p7aap")
 
