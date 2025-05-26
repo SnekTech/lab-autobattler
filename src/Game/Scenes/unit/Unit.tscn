@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcjjsaa6442rh"]
+[gd_scene load_steps=10 format=3 uid="uid://dcjjsaa6442rh"]
 
 [ext_resource type="Texture2D" uid="uid://cx1ivjobggp8n" path="res://assets/sprites/rogues.png" id="1_aqcck"]
 [ext_resource type="Script" uid="uid://b7cv6p24bm45g" path="res://Scripts/UnitManage/Unit.cs" id="1_r1lkm"]
 [ext_resource type="Resource" uid="uid://c0111qmmqxqkl" path="res://data/units/bjorn.tres" id="2_fu56h"]
+[ext_resource type="Script" uid="uid://dr4ogx7lyexgb" path="res://Scripts/Components/DragAndDrop.cs" id="4_a2dhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqcck"]
 size = Vector2(36, 36)
@@ -62,3 +63,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_fu56h")
 theme_override_styles/fill = SubResource("StyleBoxFlat_a2dhl")
 value = 70.0
 show_percentage = false
+
+[node name="DragAndDrop" type="Node" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("4_a2dhl")
+Target = NodePath("..")
