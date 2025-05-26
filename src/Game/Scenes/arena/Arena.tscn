@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://ddeqm380rgljy"]
+[gd_scene load_steps=11 format=4 uid="uid://ddeqm380rgljy"]
 
 [ext_resource type="Script" uid="uid://bac43f1ymlhio" path="res://Scripts/Arena.cs" id="1_ouftb"]
 [ext_resource type="TileSet" uid="uid://dgi1yfqbk2346" path="res://Scenes/arena/tileset.tres" id="2_p7aap"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://busvw5w0kyifc" path="res://Scripts/Components/PlayArea.cs" id="4_6ih0h"]
 [ext_resource type="PackedScene" uid="uid://dcjjsaa6442rh" path="res://Scenes/unit/Unit.tscn" id="4_cy0gq"]
 [ext_resource type="Script" uid="uid://l37k867kkyac" path="res://Scripts/Components/UnitGrid.cs" id="4_ph0kn"]
+[ext_resource type="Script" uid="uid://dlwtbiano3v1s" path="res://Scripts/Components/TileHighlighter.cs" id="6_ae3s7"]
 
 [sub_resource type="Curve" id="Curve_p7aap"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.235974, 1), 0.0, 0.0, 0, 0, Vector2(0.833333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -80,6 +81,12 @@ script = ExtResource("4_ph0kn")
 Size = Vector2i(4, 7)
 metadata/_edit_lock_ = true
 
+[node name="TileHighlighter" type="Node" parent="GameArea" node_paths=PackedStringArray("playArea", "highlightLayer")]
+script = ExtResource("6_ae3s7")
+playArea = NodePath("..")
+highlightLayer = NodePath("../Highlight")
+tile = Vector2i(3, 0)
+
 [node name="Bench" type="TileMapLayer" parent="." node_paths=PackedStringArray("UnitGrid")]
 position = Vector2(160, 320)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAsAAAABAAAAAAAAAAcAAAACAAAAAAAAAAsAAAADAAAAAAAAAAcAAAAEAAAAAAAAAAsAAAAFAAAAAAAAAAcAAAAGAAAAAAAAAAsAAAAHAAAAAAAAAAcAAAAIAAAAAAAAAAsAAAAJAAAAAAAAAAcAAAA=")
@@ -102,3 +109,9 @@ position = Vector2(64, 0)
 script = ExtResource("4_ph0kn")
 Size = Vector2i(10, 1)
 metadata/_edit_lock_ = true
+
+[node name="TileHighlighter" type="Node" parent="Bench" node_paths=PackedStringArray("playArea", "highlightLayer")]
+script = ExtResource("6_ae3s7")
+playArea = NodePath("..")
+highlightLayer = NodePath("../Highlight")
+tile = Vector2i(3, 0)
