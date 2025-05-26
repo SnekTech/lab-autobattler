@@ -27,6 +27,18 @@ public partial class DragAndDrop : Node
         }
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (_dragging && @event.IsActionPressed(InputActions.CancelDrag))
+        {
+            CancelDragging();
+        }
+        else if (_dragging && @event.IsActionReleased(InputActions.Select))
+        {
+            Drop();
+        }
+    }
+
     public override void _EnterTree()
     {
         Target.InputEvent += OnTargetInputEvent;
@@ -72,21 +84,13 @@ public partial class DragAndDrop : Node
             return;
 
         var draggingObject = GetTree().GetFirstNodeInGroup(GroupNames.Dragging);
-        
+
         if (_dragging == false && draggingObject != null)
             return; // is dragging another object
 
-        if (_dragging && @event.IsActionPressed(InputActions.CancelDrag))
-        {
-            CancelDragging();
-        }
-        else if (_dragging == false && @event.IsActionPressed(InputActions.Select))
+        if (_dragging == false && @event.IsActionPressed(InputActions.Select))
         {
             StartDragging();
-        }
-        else if (_dragging && @event.IsActionReleased(InputActions.Select))
-        {
-            Drop();
         }
     }
 }
