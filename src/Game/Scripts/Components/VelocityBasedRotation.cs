@@ -11,10 +11,10 @@ public partial class VelocityBasedRotation : Node
     public Node2D Target { get; private set; } = null!;
 
     [Export(PropertyHint.Range, "0.25,1.5")]
-    private float lerpSeconds = 0.4f;
+    private float lerpSeconds = 1f;
 
     [Export]
-    private float rotationMultiplier = 120;
+    private float maxRotationDegree = 30;
 
     [Export]
     private float xVelocityThreshold = 3;
@@ -38,18 +38,18 @@ public partial class VelocityBasedRotation : Node
         }
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (Enabled == false)
             return;
 
-        _velocity = Target.GlobalPosition - _lastPosition;
+        _velocity = (Target.GlobalPosition - _lastPosition) / (float)delta;
         _lastPosition = Target.GlobalPosition;
         _progress = _timeElapsed / lerpSeconds;
 
         if (Mathf.Abs(_velocity.X) > xVelocityThreshold)
         {
-            _angle = (float)(_velocity.Normalized().X * rotationMultiplier * delta);
+            _angle = _velocity.Normalized().X * Mathf.DegToRad(maxRotationDegree);
         }
         else
         {
