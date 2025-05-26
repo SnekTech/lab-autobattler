@@ -38,15 +38,15 @@ public partial class UnitGrid : Node2D
         UnitGridChanged?.Invoke();
     }
 
-    public bool IsCellOccupied(Vector2I index) => _units[index] != null;
+    public bool IsTileOccupied(Vector2I tile) => _units[tile] != null;
 
-    public bool IsGridFull() => _units.Keys.All(IsCellOccupied);
+    public bool IsGridFull() => _units.Keys.All(IsTileOccupied);
 
     public Vector2I GetFirstEmptyTile()
     {
         foreach (var index in _units.Keys)
         {
-            if (IsCellOccupied(index) == false)
+            if (IsTileOccupied(index) == false)
                 return index;
         }
 
