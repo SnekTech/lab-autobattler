@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://ddeqm380rgljy"]
+[gd_scene load_steps=9 format=4 uid="uid://ddeqm380rgljy"]
 
 [ext_resource type="Script" uid="uid://bac43f1ymlhio" path="res://Scripts/Arena.cs" id="1_ouftb"]
 [ext_resource type="TileSet" uid="uid://dgi1yfqbk2346" path="res://Scenes/arena/tileset.tres" id="2_p7aap"]
 [ext_resource type="Texture2D" uid="uid://mbxv0ayrsu3d" path="res://assets/sprites/star_particle.png" id="3_p7aap"]
 [ext_resource type="PackedScene" uid="uid://dcjjsaa6442rh" path="res://Scenes/unit/Unit.tscn" id="4_cy0gq"]
+[ext_resource type="Script" uid="uid://l37k867kkyac" path="res://Scripts/Components/UnitGrid.cs" id="4_ph0kn"]
 
 [sub_resource type="Curve" id="Curve_p7aap"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.235974, 1), 0.0, 0.0, 0, 0, Vector2(0.833333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -71,6 +72,11 @@ tile_set = ExtResource("2_p7aap")
 [node name="Highlight" type="TileMapLayer" parent="GameArea"]
 tile_set = ExtResource("2_p7aap")
 
+[node name="ArenaUnitGrid" type="Node2D" parent="GameArea"]
+script = ExtResource("4_ph0kn")
+Size = Vector2i(4, 7)
+metadata/_edit_lock_ = true
+
 [node name="Bench" type="TileMapLayer" parent="."]
 position = Vector2(160, 320)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAsAAAABAAAAAAAAAAcAAAACAAAAAAAAAAsAAAADAAAAAAAAAAcAAAAEAAAAAAAAAAsAAAAFAAAAAAAAAAcAAAAGAAAAAAAAAAsAAAAHAAAAAAAAAAcAAAAIAAAAAAAAAAsAAAAJAAAAAAAAAAcAAAA=")
@@ -81,8 +87,13 @@ metadata/_edit_group_ = true
 [node name="Highlight" type="TileMapLayer" parent="Bench"]
 tile_set = ExtResource("2_p7aap")
 
-[node name="Unit" parent="." instance=ExtResource("4_cy0gq")]
-position = Vector2(192, 320)
+[node name="Unit" parent="Bench" instance=ExtResource("4_cy0gq")]
+position = Vector2(32, 0)
 
-[node name="Unit3" parent="." instance=ExtResource("4_cy0gq")]
-position = Vector2(224, 320)
+[node name="Unit3" parent="Bench" instance=ExtResource("4_cy0gq")]
+position = Vector2(64, 0)
+
+[node name="BenchUnitGrid" type="Node2D" parent="Bench"]
+script = ExtResource("4_ph0kn")
+Size = Vector2i(10, 1)
+metadata/_edit_lock_ = true
