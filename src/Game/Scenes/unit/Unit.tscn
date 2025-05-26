@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcjjsaa6442rh"]
+[gd_scene load_steps=11 format=3 uid="uid://dcjjsaa6442rh"]
 
 [ext_resource type="Texture2D" uid="uid://cx1ivjobggp8n" path="res://assets/sprites/rogues.png" id="1_aqcck"]
 [ext_resource type="Script" uid="uid://b7cv6p24bm45g" path="res://Scripts/UnitManage/Unit.cs" id="1_r1lkm"]
 [ext_resource type="Resource" uid="uid://c0111qmmqxqkl" path="res://data/units/bjorn.tres" id="2_fu56h"]
 [ext_resource type="Script" uid="uid://dr4ogx7lyexgb" path="res://Scripts/Components/DragAndDrop.cs" id="4_a2dhl"]
+[ext_resource type="Script" uid="uid://ogug2qn8pw8e" path="res://Scripts/Components/VelocityBasedRotation.cs" id="5_4yan6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqcck"]
 size = Vector2(36, 36)
@@ -67,3 +68,9 @@ show_percentage = false
 [node name="DragAndDrop" type="Node" parent="." node_paths=PackedStringArray("Target")]
 script = ExtResource("4_a2dhl")
 Target = NodePath("..")
+
+[node name="VelocityBasedRotation" type="Node" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("5_4yan6")
+Target = NodePath("../Skin")
+lerpSeconds = 0.3
+rotationMultiplier = 40.0
