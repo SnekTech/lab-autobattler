@@ -17,11 +17,12 @@ public partial class DragAndDrop : Node
 
     private Vector2 _startingPosition;
     private Vector2 _offset;
-    private bool _dragging;
+
+    public bool Dragging { get; private set; }
 
     public override void _Process(double delta)
     {
-        if (_dragging)
+        if (Dragging)
         {
             Target.GlobalPosition = Target.GetGlobalMousePosition() + _offset;
         }
@@ -29,11 +30,11 @@ public partial class DragAndDrop : Node
 
     public override void _Input(InputEvent @event)
     {
-        if (_dragging && @event.IsActionPressed(InputActions.CancelDrag))
+        if (Dragging && @event.IsActionPressed(InputActions.CancelDrag))
         {
             CancelDragging();
         }
-        else if (_dragging && @event.IsActionReleased(InputActions.Select))
+        else if (Dragging && @event.IsActionReleased(InputActions.Select))
         {
             Drop();
         }
@@ -51,7 +52,7 @@ public partial class DragAndDrop : Node
 
     private void EndDragging()
     {
-        _dragging = false;
+        Dragging = false;
         Target.RemoveFromGroup(GroupNames.Dragging);
         Target.ZIndex = 0;
     }
@@ -64,7 +65,7 @@ public partial class DragAndDrop : Node
 
     private void StartDragging()
     {
-        _dragging = true;
+        Dragging = true;
         _startingPosition = Target.GlobalPosition;
         Target.AddToGroup(GroupNames.Dragging);
         Target.ZIndex = 99;
@@ -85,10 +86,10 @@ public partial class DragAndDrop : Node
 
         var draggingObject = GetTree().GetFirstNodeInGroup(GroupNames.Dragging);
 
-        if (_dragging == false && draggingObject != null)
+        if (Dragging == false && draggingObject != null)
             return; // is dragging another object
 
-        if (_dragging == false && @event.IsActionPressed(InputActions.Select))
+        if (Dragging == false && @event.IsActionPressed(InputActions.Select))
         {
             StartDragging();
         }

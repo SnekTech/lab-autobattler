@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcjjsaa6442rh"]
+[gd_scene load_steps=13 format=3 uid="uid://dcjjsaa6442rh"]
 
 [ext_resource type="Texture2D" uid="uid://cx1ivjobggp8n" path="res://assets/sprites/rogues.png" id="1_aqcck"]
 [ext_resource type="Script" uid="uid://b7cv6p24bm45g" path="res://Scripts/UnitManage/Unit.cs" id="1_r1lkm"]
 [ext_resource type="Resource" uid="uid://c0111qmmqxqkl" path="res://data/units/bjorn.tres" id="2_fu56h"]
+[ext_resource type="Material" uid="uid://bb8m5fhpi4wqn" path="res://assets/shaders/2d_outline_shader.tres" id="3_f1524"]
 [ext_resource type="Script" uid="uid://dr4ogx7lyexgb" path="res://Scripts/Components/DragAndDrop.cs" id="4_a2dhl"]
 [ext_resource type="Script" uid="uid://ogug2qn8pw8e" path="res://Scripts/Components/VelocityBasedRotation.cs" id="5_4yan6"]
+[ext_resource type="Script" uid="uid://bwj6qjh8hww4g" path="res://Scripts/Components/OutlineHighlighter.cs" id="7_wsrrq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqcck"]
 size = Vector2(36, 36)
@@ -34,8 +36,13 @@ border_color = Color(0.231373, 0.113725, 0.0980392, 1)
 [node name="Unit" type="Area2D"]
 script = ExtResource("1_r1lkm")
 defaultStats = ExtResource("2_fu56h")
+metadata/_edit_group_ = true
 
-[node name="Skin" type="Sprite2D" parent="."]
+[node name="Visuals" type="CanvasGroup" parent="."]
+material = ExtResource("3_f1524")
+
+[node name="Skin" type="Sprite2D" parent="Visuals"]
+unique_name_in_owner = true
 position = Vector2(16, 8)
 texture = ExtResource("1_aqcck")
 region_enabled = true
@@ -71,6 +78,11 @@ Target = NodePath("..")
 
 [node name="VelocityBasedRotation" type="Node" parent="." node_paths=PackedStringArray("Target")]
 script = ExtResource("5_4yan6")
-Target = NodePath("../Skin")
+Target = NodePath("../Visuals/Skin")
 lerpSeconds = 0.3
 rotationMultiplier = 40.0
+
+[node name="OutlineHighlighter" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+script = ExtResource("7_wsrrq")
+visuals = NodePath("../Visuals")
+outlineThickness = 2.0

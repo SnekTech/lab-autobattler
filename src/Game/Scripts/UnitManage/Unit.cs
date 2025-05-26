@@ -1,5 +1,6 @@
 ﻿using Godot;
 using GodotUtilities;
+using LabAutobattler.Components;
 using LabAutobattler.Data.Units;
 
 namespace LabAutobattler.UnitManage;
@@ -19,21 +20,80 @@ public partial class Unit : Area2D
     [Node]
     private ProgressBar manaBar = null!;
 
-    private UnitStats? _stats;
+    [Node]
+    private DragAndDrop dragAndDrop = null!;
+
+    [Node]
+    private VelocityBasedRotation velocityBasedRotation = null!;
+
+    [Node]
+    private OutlineHighlighter outlineHighlighter = null!;
+
+    private UnitStats _stats = null!;
 
     public UnitStats Stats
     {
-        get => _stats ?? defaultStats;
+        get => _stats;
         set
         {
             _stats = value;
             UpdateWithStats(_stats);
         }
     }
-    
+
     public override void _Ready()
     {
         Stats = defaultStats;
+    }
+
+    public override void _EnterTree()
+    {
+        MouseEntered += OnMouseEntered;
+        MouseExited += OnMouseExited;
+        dragAndDrop.DragStarted += OnDragStart;
+        dragAndDrop.DragCanceled += OnDragCanceled;
+    }
+
+    public override void _ExitTree()
+    {
+        MouseEntered -= OnMouseEntered;
+        MouseExited -= OnMouseExited;
+        dragAndDrop.DragStarted -= OnDragStart;
+        dragAndDrop.DragCanceled -= OnDragCanceled;
+    }
+
+    private void OnMouseEntered()
+    {
+        if (dragAndDrop.Dragging)
+            return;
+
+        outlineHighlighter.Highlight();
+        ZIndex = 1;
+    }
+
+    private void OnMouseExited()
+    {
+        if (dragAndDrop.Dragging)
+            return;
+
+        outlineHighlighter.ClearHighlight();
+        ZIndex = 0;
+    }
+
+    private void OnDragStart()
+    {
+        velocityBasedRotation.Enabled = true;
+    }
+
+    private void OnDragCanceled(Vector2 startingPosition)
+    {
+        ResetAfterDragging(startingPosition);
+    }
+
+    private void ResetAfterDragging(Vector2 startingPosition)
+    {
+        velocityBasedRotation.Enabled = false;
+        GlobalPosition = startingPosition;
     }
 
     private void UpdateWithStats(UnitStats newStats)
