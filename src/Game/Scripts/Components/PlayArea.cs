@@ -1,4 +1,5 @@
 ﻿using Godot;
+using LabAutobattler.UnitManage;
 
 namespace LabAutobattler.Components;
 
@@ -21,6 +22,11 @@ public partial class PlayArea : TileMapLayer
     public Vector2I GetTileFromGlobal(Vector2 globalPosition) => LocalToMap(ToLocal(globalPosition));
 
     public Vector2 GetGlobalFromTile(Vector2I tile) => ToGlobal(MapToLocal(tile));
+
+    public void SnapUnitToTile(Unit unit, Vector2I tile)
+    {
+        unit.GlobalPosition = GetGlobalFromTile(tile) - Constants.HalfCellSize;
+    }
 
     public Vector2I GetHoveredTile() => LocalToMap(GetLocalMousePosition());
 

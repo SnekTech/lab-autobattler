@@ -70,7 +70,7 @@ public partial class UnitMover : Node
     private void MoveUnit(Unit unit, PlayArea playArea, Vector2I tile)
     {
         playArea.UnitGrid.AddUnit(tile, unit);
-        unit.GlobalPosition = playArea.GetGlobalFromTile(tile) - Constants.HalfCellSize;
+        playArea.SnapUnitToTile(unit, tile);
         unit.Reparent(playArea.UnitGrid);
     }
 
