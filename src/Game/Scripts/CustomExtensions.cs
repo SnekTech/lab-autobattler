@@ -34,11 +34,6 @@ public static class CustomExtensions
         }
     }
 
-    public static Task DelayGd(float timeSec)
-    {
-        return GTweenSequenceBuilder.New().AppendTime(timeSec).Build().PlayAsync(CancellationToken.None);
-    }
-
     public static void SetModulateAlpha(this CanvasItem canvasItem, float alpha)
     {
         canvasItem.Modulate = canvasItem.Modulate with { A = alpha };
@@ -70,5 +65,13 @@ public static class CustomExtensions
         {
             return new Vector2(GD.Randf() * 2 - 1, GD.Randf() * 2 - 1);
         }
+    }
+}
+
+public static class TaskUtil
+{
+    public static Task DelayGd(float timeSec)
+    {
+        return GTweenSequenceBuilder.New().AppendTime(timeSec).Build().PlayAsync(CancellationToken.None);
     }
 }

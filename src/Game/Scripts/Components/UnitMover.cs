@@ -19,7 +19,7 @@ public partial class UnitMover : Node
         }
     }
 
-    private void SetupUnit(Unit unit)
+    public void SetupUnit(Unit unit)
     {
         var unitDnd = unit.DragAndDrop;
         unitDnd.DragStarted += () => OnUnitDragStarted(unit);
@@ -51,7 +51,7 @@ public partial class UnitMover : Node
         return areaIndex;
     }
 
-    public void ResetUnitToStartingPosition(Vector2 startingPosition, Unit unit)
+    private void ResetUnitToStartingPosition(Vector2 startingPosition, Unit unit)
     {
         var index = GetPlayAreaIndexForPosition(startingPosition);
         if (index < 0)
