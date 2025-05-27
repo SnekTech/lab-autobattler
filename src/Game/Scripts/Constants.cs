@@ -12,6 +12,7 @@ public static class Constants
 public static class GroupNames
 {
     public static readonly StringName Dragging = "dragging";
+    public static readonly StringName Units = "units";
 }
 
 public static class InputActions

@@ -21,7 +21,7 @@ public partial class Unit : Area2D
     private ProgressBar manaBar = null!;
 
     [Node]
-    private DragAndDrop dragAndDrop = null!;
+    public DragAndDrop DragAndDrop { get; private set; } = null!;
 
     [Node]
     private VelocityBasedRotation velocityBasedRotation = null!;
@@ -50,21 +50,21 @@ public partial class Unit : Area2D
     {
         MouseEntered += OnMouseEntered;
         MouseExited += OnMouseExited;
-        dragAndDrop.DragStarted += OnDragStart;
-        dragAndDrop.DragCanceled += OnDragCanceled;
+        DragAndDrop.DragStarted += OnDragStart;
+        DragAndDrop.DragCanceled += OnDragCanceled;
     }
 
     public override void _ExitTree()
     {
         MouseEntered -= OnMouseEntered;
         MouseExited -= OnMouseExited;
-        dragAndDrop.DragStarted -= OnDragStart;
-        dragAndDrop.DragCanceled -= OnDragCanceled;
+        DragAndDrop.DragStarted -= OnDragStart;
+        DragAndDrop.DragCanceled -= OnDragCanceled;
     }
 
     private void OnMouseEntered()
     {
-        if (dragAndDrop.Dragging)
+        if (DragAndDrop.Dragging)
             return;
 
         outlineHighlighter.Highlight();
@@ -73,7 +73,7 @@ public partial class Unit : Area2D
 
     private void OnMouseExited()
     {
-        if (dragAndDrop.Dragging)
+        if (DragAndDrop.Dragging)
             return;
 
         outlineHighlighter.ClearHighlight();
@@ -90,7 +90,7 @@ public partial class Unit : Area2D
         ResetAfterDragging(startingPosition);
     }
 
-    private void ResetAfterDragging(Vector2 startingPosition)
+    public void ResetAfterDragging(Vector2 startingPosition)
     {
         velocityBasedRotation.Enabled = false;
         GlobalPosition = startingPosition;

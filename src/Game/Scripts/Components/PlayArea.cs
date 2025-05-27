@@ -2,10 +2,14 @@
 
 namespace LabAutobattler.Components;
 
+[GlobalClass]
 public partial class PlayArea : TileMapLayer
 {
     [Export]
     public UnitGrid UnitGrid { get; private set; } = null!;
+
+    [Export]
+    public TileHighlighter TileHighlighter { get; private set; } = null!;
 
     private Rect2I _bounds;
 

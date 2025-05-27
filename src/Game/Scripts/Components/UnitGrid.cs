@@ -38,6 +38,18 @@ public partial class UnitGrid : Node2D
         UnitGridChanged?.Invoke();
     }
 
+    public void RemoveUnit(Vector2I tile)
+    {
+        var unit = _units[tile];
+        if (unit == null)
+            return;
+
+        _units[tile] = null;
+        UnitGridChanged?.Invoke();
+    }
+
+    public Unit? GetUnitAt(Vector2I tile) => _units[tile];
+
     public bool IsTileOccupied(Vector2I tile) => _units[tile] != null;
 
     public bool IsGridFull() => _units.Keys.All(IsTileOccupied);
