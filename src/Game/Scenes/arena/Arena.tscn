@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ddeqm380rgljy"]
+[gd_scene load_steps=14 format=4 uid="uid://ddeqm380rgljy"]
 
 [ext_resource type="Script" uid="uid://bac43f1ymlhio" path="res://Scripts/Arena.cs" id="1_ouftb"]
 [ext_resource type="TileSet" uid="uid://dgi1yfqbk2346" path="res://Scenes/arena/tileset.tres" id="2_p7aap"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dlwtbiano3v1s" path="res://Scripts/Components/TileHighlighter.cs" id="6_ae3s7"]
 [ext_resource type="Script" uid="uid://dacmpbydcvao5" path="res://Scripts/Components/UnitMover.cs" id="8_1oecu"]
 [ext_resource type="Resource" uid="uid://b2cw3x4we4ml5" path="res://data/units/arthur.tres" id="8_775j4"]
+[ext_resource type="Resource" uid="uid://bgxbrnpo2x8ye" path="res://data/units/robin.tres" id="8_xhvgg"]
 
 [sub_resource type="Curve" id="Curve_p7aap"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.235974, 1), 0.0, 0.0, 0, 0, Vector2(0.833333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -106,6 +107,10 @@ tile_set = ExtResource("2_p7aap")
 
 [node name="Unit" parent="Bench" instance=ExtResource("4_cy0gq")]
 position = Vector2(32, 0)
+
+[node name="Unit2" parent="Bench" instance=ExtResource("4_cy0gq")]
+position = Vector2(96, 0)
+defaultStats = ExtResource("8_xhvgg")
 
 [node name="Unit3" parent="Bench" instance=ExtResource("4_cy0gq")]
 position = Vector2(64, 0)
