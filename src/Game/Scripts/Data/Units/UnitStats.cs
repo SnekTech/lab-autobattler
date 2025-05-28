@@ -24,9 +24,26 @@ public partial class UnitStats : Resource
     [Export]
     public int GoldCost { get; private set; } = 1;
 
+    [Export(PropertyHint.Range, "1,3")]
+    public int Tier
+    {
+        get => _tier;
+        set
+        {
+            _tier = value;
+            EmitChanged();
+        }
+    }
+
     [ExportCategory("Visuals")]
     [Export]
     public Vector2I SkinCoordinates { get; private set; }
+
+    private int _tier;
+
+    private int CombinedUnitCount => (int)Mathf.Pow(3, Tier - 1);
+
+    public int GetGoldValue => GoldCost * CombinedUnitCount;
 
     public override string ToString()
     {
