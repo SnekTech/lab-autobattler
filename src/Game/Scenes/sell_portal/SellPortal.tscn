@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2bn1a145e1yj"]
+
+[ext_resource type="Material" uid="uid://bb8m5fhpi4wqn" path="res://assets/shaders/2d_outline_shader.tres" id="1_m5erb"]
+[ext_resource type="Texture2D" uid="uid://b1ro1ssup7dcp" path="res://assets/sprites/tiles.png" id="2_agia5"]
+[ext_resource type="Script" uid="uid://bwj6qjh8hww4g" path="res://Scripts/Components/OutlineHighlighter.cs" id="3_7tm4o"]
+[ext_resource type="Texture2D" uid="uid://c4awhqfup7o2k" path="res://assets/sprites/gold.png" id="4_agia5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cm716"]
+radius = 24.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7tm4o"]
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.627451)
+
+[node name="SellPortal" type="Area2D"]
+
+[node name="Visuals" type="CanvasGroup" parent="."]
+material = ExtResource("1_m5erb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("2_agia5")
+centered = false
+region_enabled = true
+region_rect = Rect2(224, 512, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("CircleShape2D_cm716")
+
+[node name="OutlineHighlighter" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_7tm4o")
+visuals = NodePath("../Visuals")
+OutlineColor = Color(0.556863, 0.913725, 0.745098, 1)
+outlineThickness = 2.0
+
+[node name="Label" type="Label" parent="."]
+offset_top = 36.0
+offset_right = 32.0
+offset_bottom = 54.0
+text = "sell"
+label_settings = SubResource("LabelSettings_7tm4o")
+horizontal_alignment = 1
+
+[node name="Gold" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_top = 51.0
+offset_right = 32.0
+offset_bottom = 69.0
+alignment = 1
+
+[node name="GoldLabel" type="Label" parent="Gold"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "9"
+label_settings = SubResource("LabelSettings_7tm4o")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Gold"]
+custom_minimum_size = Vector2(9, 0)
+layout_mode = 2
+texture = ExtResource("4_agia5")
+expand_mode = 1
+stretch_mode = 5
