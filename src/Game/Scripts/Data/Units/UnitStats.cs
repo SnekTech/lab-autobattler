@@ -39,11 +39,11 @@ public partial class UnitStats : Resource
     [Export]
     public Vector2I SkinCoordinates { get; private set; }
 
-    private int _tier;
+    private int _tier = 1;
 
     private int CombinedUnitCount => (int)Mathf.Pow(3, Tier - 1);
 
-    public int GetGoldValue => GoldCost * CombinedUnitCount;
+    public int GoldValue => GoldCost * CombinedUnitCount;
 
     public override string ToString()
     {

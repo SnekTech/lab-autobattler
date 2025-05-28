@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2bn1a145e1yj"]
+[gd_scene load_steps=9 format=3 uid="uid://d2bn1a145e1yj"]
 
+[ext_resource type="Script" uid="uid://f7h2qpjms1c6" path="res://Scripts/UnitManage/SellPortal.cs" id="1_cm716"]
 [ext_resource type="Material" uid="uid://bb8m5fhpi4wqn" path="res://assets/shaders/2d_outline_shader.tres" id="1_m5erb"]
 [ext_resource type="Texture2D" uid="uid://b1ro1ssup7dcp" path="res://assets/sprites/tiles.png" id="2_agia5"]
+[ext_resource type="Resource" uid="uid://b4k0uot4vobg7" path="res://data/player/player_stats.tres" id="2_grm1j"]
 [ext_resource type="Script" uid="uid://bwj6qjh8hww4g" path="res://Scripts/Components/OutlineHighlighter.cs" id="3_7tm4o"]
 [ext_resource type="Texture2D" uid="uid://c4awhqfup7o2k" path="res://assets/sprites/gold.png" id="4_agia5"]
 
@@ -13,6 +15,8 @@ shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.627451)
 
 [node name="SellPortal" type="Area2D"]
+script = ExtResource("1_cm716")
+PlayerStats = ExtResource("2_grm1j")
 
 [node name="Visuals" type="CanvasGroup" parent="."]
 material = ExtResource("1_m5erb")

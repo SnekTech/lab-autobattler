@@ -1,0 +1,102 @@
+﻿using Godot;
+using GodotUtilities;
+using LabAutobattler.Components;
+using LabAutobattler.Data.Player;
+
+namespace LabAutobattler.UnitManage;
+
+[Scene]
+public partial class SellPortal : Area2D
+{
+    [Export]
+    public PlayerStats PlayerStats { get; private set; } = null!;
+
+    [Node]
+    private HBoxContainer Gold { get; set; } = null!;
+
+    [Node]
+    private Label GoldLabel { get; set; } = null!;
+
+    [Node]
+    private OutlineHighlighter OutlineHighlighter { get; set; } = null!;
+
+    private Unit? _currentUnit;
+
+    public override void _Ready()
+    {
+        var units = GetTree().GetNodesInGroup<Unit>(GroupNames.Units);
+        foreach (var unit in units)
+        {
+            SetupUnit(unit);
+        }
+    }
+
+    public override void _EnterTree()
+    {
+        AreaEntered += OnAreaEntered;
+        AreaExited += OnAreaExited;
+    }
+
+    public override void _ExitTree()
+    {
+        AreaEntered -= OnAreaEntered;
+        AreaExited -= OnAreaExited;
+    }
+
+    public void SetupUnit(Unit unit)
+    {
+        unit.DragAndDrop.Dropped += _ => OnUnitDropped(unit);
+        unit.QuickSellPressed += () => SellUnit(unit);
+    }
+
+    private void OnUnitDropped(Unit unit)
+    {
+        if (unit == _currentUnit)
+        {
+            SellUnit(unit);
+        }
+    }
+
+    private void SellUnit(Unit unit)
+    {
+        PlayerStats.Gold += unit.Stats.GoldValue;
+        // todo: give items back to item pool
+        // todo: put units back to the pool
+        GD.Print(PlayerStats.Gold);
+
+        unit.QueueFree();
+    }
+
+    private void OnAreaEntered(Area2D area)
+    {
+        if (area is not Unit unit)
+            return;
+
+        _currentUnit = unit;
+        OutlineHighlighter.Highlight();
+        GoldLabel.Text = unit.Stats.GoldValue.ToString();
+        Gold.Show();
+    }
+
+    private void OnAreaExited(Area2D area)
+    {
+        if (area is not Unit unit)
+            return;
+
+        if (unit == _currentUnit)
+        {
+            _currentUnit = null;
+        }
+
+        OutlineHighlighter.ClearHighlight();
+        Gold.Hide();
+    }
+
+    public override void _Notification(int what)
+    {
+        if (what == NotificationSceneInstantiated)
+        {
+            WireNodes();
+        }
+    }
+}

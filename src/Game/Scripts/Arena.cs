@@ -1,6 +1,7 @@
 ﻿using Godot;
 using GodotUtilities;
 using LabAutobattler.Components;
+using LabAutobattler.UnitManage;
 
 namespace LabAutobattler;
 
@@ -11,15 +12,23 @@ public partial class Arena : Node2D
     private UnitMover unitMover = null!;
     [Node]
     private UnitSpawner unitSpawner = null!;
+    [Node]
+    private SellPortal sellPortal = null!;
 
     public override void _EnterTree()
     {
-        unitSpawner.UnitSpawned += unitMover.SetupUnit;
+        unitSpawner.UnitSpawned += OnUnitSpawned;
     }
 
     public override void _ExitTree()
     {
-        unitSpawner.UnitSpawned -= unitMover.SetupUnit;
+        unitSpawner.UnitSpawned -= OnUnitSpawned;
+    }
+
+    private void OnUnitSpawned(Unit unit)
+    {
+        unitMover.SetupUnit(unit);
+        sellPortal.SetupUnit(unit);
     }
 
     public override void _Notification(int what)
