@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using GodotUtilities;
 using LabAutobattler.Components;
 using LabAutobattler.Data.Units;
@@ -8,6 +9,8 @@ namespace LabAutobattler.UnitManage;
 [Scene]
 public partial class Unit : Area2D
 {
+    public event Action? QuickSellPressed;
+
     [Export]
     private UnitStats defaultStats = null!;
 
@@ -30,6 +33,7 @@ public partial class Unit : Area2D
     private OutlineHighlighter outlineHighlighter = null!;
 
     private UnitStats _stats = null!;
+    private bool IsHovered { get; set; }
 
     public UnitStats Stats
     {
@@ -62,11 +66,23 @@ public partial class Unit : Area2D
         DragAndDrop.DragCanceled -= OnDragCanceled;
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (IsHovered == false)
+            return;
+
+        if (@event.IsActionPressed(InputActions.QuickSell))
+        {
+            QuickSellPressed?.Invoke();
+        }
+    }
+
     private void OnMouseEntered()
     {
         if (DragAndDrop.Dragging)
             return;
 
+        IsHovered = true;
         outlineHighlighter.Highlight();
         ZIndex = 1;
     }
@@ -76,6 +92,7 @@ public partial class Unit : Area2D
         if (DragAndDrop.Dragging)
             return;
 
+        IsHovered = false;
         outlineHighlighter.ClearHighlight();
         ZIndex = 0;
     }

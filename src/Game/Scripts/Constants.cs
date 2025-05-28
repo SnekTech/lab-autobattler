@@ -19,4 +19,5 @@ public static class InputActions
 {
     public static readonly StringName CancelDrag = "cancel_drag";
     public static readonly StringName Select = "select";
+    public static readonly StringName QuickSell = "quick_sell";
 }
