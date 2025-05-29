@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://ddeqm380rgljy"]
+[gd_scene load_steps=17 format=4 uid="uid://ddeqm380rgljy"]
 
 [ext_resource type="Script" uid="uid://bac43f1ymlhio" path="res://Scripts/Arena.cs" id="1_ouftb"]
 [ext_resource type="TileSet" uid="uid://dgi1yfqbk2346" path="res://Scenes/arena/tileset.tres" id="2_p7aap"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://bgxbrnpo2x8ye" path="res://data/units/robin.tres" id="8_xhvgg"]
 [ext_resource type="Script" uid="uid://dqj8h2j1u5h30" path="res://Scripts/Components/UnitSpawner.cs" id="11_o6u42"]
 [ext_resource type="PackedScene" uid="uid://d2bn1a145e1yj" path="res://Scenes/sell_portal/SellPortal.tscn" id="12_60rfi"]
+[ext_resource type="PackedScene" uid="uid://bf7ta3hh8cvsn" path="res://Scenes/shop/Shop.tscn" id="13_fm77b"]
 
 [sub_resource type="Curve" id="Curve_p7aap"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.235974, 1), 0.0, 0.0, 0, 0, Vector2(0.833333, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -141,3 +142,7 @@ GameArea = NodePath("../GameArea")
 
 [node name="SellPortal" parent="." instance=ExtResource("12_60rfi")]
 position = Vector2(80, 288)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Shop" parent="UI" instance=ExtResource("13_fm77b")]
