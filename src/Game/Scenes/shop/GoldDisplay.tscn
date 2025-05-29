@@ -9,14 +9,16 @@ shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.486275)
 
 [node name="GoldDisplay" type="HBoxContainer"]
+custom_minimum_size = Vector2(32, 18)
 offset_right = 28.0
 offset_bottom = 18.0
+alignment = 2
 script = ExtResource("1_vaq1o")
 PlayerStats = ExtResource("2_hl7s6")
 
 [node name="Gold" type="Label" parent="."]
 layout_mode = 2
-text = "99"
+text = "44"
 label_settings = SubResource("LabelSettings_k38qi")
 
 [node name="Icon" type="TextureRect" parent="."]
