@@ -62,6 +62,7 @@ public partial class UnitCard : Button
         UnitStats = defaultUnitStats;
         UpdateWithPlayerStats();
 
+        // todo: remove these
         UnitBought += unitStats =>
         {
             GD.Print($"bought unit: {unitStats}");

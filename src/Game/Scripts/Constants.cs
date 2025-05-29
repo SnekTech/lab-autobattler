@@ -10,6 +10,7 @@ public static class Constants
     public static readonly Vector2I QuarterCellSize = new(8, 8);
 
     public const int RerollCost = 2;
+    public const int BuyXpCost = 4;
 
     public static readonly Dictionary<int, int> XpRequirements = new()
     {
