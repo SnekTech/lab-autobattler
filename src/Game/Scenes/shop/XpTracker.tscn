@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://badhxudi1rw6h"]
+
+[ext_resource type="FontFile" uid="uid://8di0jvr25vat" path="res://assets/font/m5x7.ttf" id="1_emt4f"]
+[ext_resource type="Script" uid="uid://onkxvliimsxk" path="res://Scripts/UI/Shop/XpTracker.cs" id="1_xil0i"]
+[ext_resource type="Resource" uid="uid://b4k0uot4vobg7" path="res://data/player/player_stats.tres" id="2_irlep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mr0xa"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emt4f"]
+bg_color = Color(0.337255, 0.635294, 0.882353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7nknc"]
+font = ExtResource("1_emt4f")
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.517647)
+
+[node name="XpTracker" type="VBoxContainer"]
+custom_minimum_size = Vector2(70, 28)
+offset_right = 70.0
+offset_bottom = 28.0
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_xil0i")
+PlayerStats = ExtResource("2_irlep")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_mr0xa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_emt4f")
+value = 70.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="XpLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "99/99"
+label_settings = SubResource("LabelSettings_7nknc")
+
+[node name="LevelLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "lv: 1"
+label_settings = SubResource("LabelSettings_7nknc")

@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Collections.Generic;
+using Godot;
 
 namespace LabAutobattler;
 
@@ -9,6 +10,20 @@ public static class Constants
     public static readonly Vector2I QuarterCellSize = new(8, 8);
 
     public const int RerollCost = 2;
+
+    public static readonly Dictionary<int, int> XpRequirements = new()
+    {
+        [1] = 0,
+        [2] = 2,
+        [3] = 2,
+        [4] = 6,
+        [5] = 10,
+        [6] = 20,
+        [7] = 36,
+        [8] = 48,
+        [9] = 76,
+        [10] = 76
+    };
 }
 
 public static class GroupNames

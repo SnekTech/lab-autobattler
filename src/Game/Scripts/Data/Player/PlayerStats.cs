@@ -24,6 +24,18 @@ public partial class PlayerStats : Resource
         {
             _xp = value;
             EmitChanged();
+
+            if (Level == 10)
+                return;
+
+            var xpRequirement = CurrentXpRequirement;
+            while (Level < 10 && _xp >= xpRequirement)
+            {
+                Level++;
+                _xp -= xpRequirement;
+                xpRequirement = CurrentXpRequirement;
+                EmitChanged();
+            }
         }
     }
 
@@ -35,6 +47,15 @@ public partial class PlayerStats : Resource
         {
             _level = value;
             EmitChanged();
+        }
+    }
+
+    public int CurrentXpRequirement
+    {
+        get
+        {
+            var nextLevel = Mathf.Clamp(Level + 1, 1, 10);
+            return Constants.XpRequirements[nextLevel];
         }
     }
 
