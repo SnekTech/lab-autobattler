@@ -5,7 +5,7 @@ using LabAutobattler.Data.Player;
 namespace LabAutobattler.UI.Shop;
 
 [Scene]
-public partial class Reroll : Button
+public partial class RerollButton : Button
 {
     [Export]
     private PlayerStats PlayerStats { get; set; } = null!;
