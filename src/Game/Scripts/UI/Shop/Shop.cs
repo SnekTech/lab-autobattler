@@ -82,9 +82,7 @@ public partial class Shop : VBoxContainer
 
     private void OnRerollPressed()
     {
-        GD.Print(UnitPool);
         PutBackRemainingToPool();
-        GD.Print(UnitPool);
         RollUnits();
     }
 

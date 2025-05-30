@@ -61,13 +61,6 @@ public partial class UnitCard : Button
     public override void _Ready()
     {
         UpdateWithPlayerStats();
-
-        // todo: remove these
-        UnitBought += unitStats =>
-        {
-            GD.Print($"bought unit: {unitStats}");
-            GD.Print($"gold: {PlayerStats.Gold}");
-        };
     }
 
     public override void _EnterTree()
