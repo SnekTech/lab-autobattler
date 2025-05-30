@@ -1,4 +1,6 @@
-﻿using Godot;
+﻿using System.Linq;
+using Godot;
+using LabAutobattler.Data.Units;
 
 namespace LabAutobattler.Data.Player;
 
@@ -57,6 +59,15 @@ public partial class PlayerStats : Resource
             var nextLevel = Mathf.Clamp(Level + 1, 1, 10);
             return Constants.XpRequirements[nextLevel];
         }
+    }
+
+    public UnitRarity GetRandomRarityForLevel()
+    {
+        var rng = new RandomNumberGenerator();
+        var array = Constants.RollRarities[Level];
+        var weights = Constants.RollChances[Level];
+
+        return array[rng.RandWeighted(weights)];
     }
 
     private int _gold;

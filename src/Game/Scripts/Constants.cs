@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Godot;
+using LabAutobattler.Data.Units;
 
 namespace LabAutobattler;
 
@@ -24,6 +25,32 @@ public static class Constants
         [8] = 48,
         [9] = 76,
         [10] = 76
+    };
+    public static readonly Dictionary<int, UnitRarity[]> RollRarities = new()
+    {
+        [1] = [UnitRarity.Common],
+        [2] = [UnitRarity.Common],
+        [3] = [UnitRarity.Common, UnitRarity.Uncommon],
+        [4] = [UnitRarity.Common, UnitRarity.Uncommon, UnitRarity.Rare],
+        [5] = [UnitRarity.Common, UnitRarity.Uncommon, UnitRarity.Rare],
+        [6] = [UnitRarity.Common, UnitRarity.Uncommon, UnitRarity.Rare],
+        [7] = [UnitRarity.Common, UnitRarity.Uncommon, UnitRarity.Rare, UnitRarity.Legendary],
+        [8] = [UnitRarity.Common, UnitRarity.Uncommon, UnitRarity.Rare, UnitRarity.Legendary],
+        [9] = [UnitRarity.Common, UnitRarity.Uncommon, UnitRarity.Rare, UnitRarity.Legendary],
+        [10] = [UnitRarity.Common, UnitRarity.Uncommon, UnitRarity.Rare, UnitRarity.Legendary]
+    };
+    public static readonly Dictionary<int, float[]> RollChances = new()
+    {
+        [1] = [1f],
+        [2] = [1f],
+        [3] = [7.5f, 2.5f],
+        [4] = [6.5f, 3.0f, 0.5f],
+        [5] = [5.0f, 3.5f, 1.5f],
+        [6] = [4.0f, 4.0f, 2.0f],
+        [7] = [2.75f, 4.0f, 3.24f, 0.1f],
+        [8] = [2.5f, 3.75f, 3.45f, 0.3f],
+        [9] = [1.75f, 2.75f, 4.5f, 1.0f],
+        [10] = [1.0f, 2.0f, 4.5f, 2.5f]
     };
 }
 
