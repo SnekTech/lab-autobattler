@@ -35,13 +35,16 @@ public partial class UnitStats : Resource
         }
     }
 
+    [Export]
+    public int PoolCount { get; private set; } = 5;
+
     [ExportCategory("Visuals")]
     [Export]
     public Vector2I SkinCoordinates { get; private set; }
 
     private int _tier = 1;
 
-    private int CombinedUnitCount => (int)Mathf.Pow(3, Tier - 1);
+    public int CombinedUnitCount => (int)Mathf.Pow(3, Tier - 1);
 
     public int GoldValue => GoldCost * CombinedUnitCount;
 

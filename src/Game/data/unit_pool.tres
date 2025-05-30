@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UnitPool" load_steps=6 format=3 uid="uid://d1ux7t0jiq2qg"]
+
+[ext_resource type="Script" uid="uid://burid4sghmako" path="res://Scripts/Data/Units/UnitStats.cs" id="1_6cbrl"]
+[ext_resource type="Script" uid="uid://jlv3lmt8t3md" path="res://Scripts/Data/Units/UnitPool.cs" id="2_gftay"]
+[ext_resource type="Resource" uid="uid://b2cw3x4we4ml5" path="res://data/units/arthur.tres" id="2_nelsn"]
+[ext_resource type="Resource" uid="uid://c0111qmmqxqkl" path="res://data/units/bjorn.tres" id="3_qdoon"]
+[ext_resource type="Resource" uid="uid://bgxbrnpo2x8ye" path="res://data/units/robin.tres" id="4_5p8hn"]
+
+[resource]
+script = ExtResource("2_gftay")
+AvailableUnits = Array[ExtResource("1_6cbrl")]([ExtResource("2_nelsn"), ExtResource("3_qdoon"), ExtResource("4_5p8hn")])
+metadata/_custom_type_script = "uid://jlv3lmt8t3md"
