@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://ddeqm380rgljy"]
+[gd_scene load_steps=18 format=4 uid="uid://ddeqm380rgljy"]
 
 [ext_resource type="Script" uid="uid://bac43f1ymlhio" path="res://Scripts/Arena.cs" id="1_ouftb"]
 [ext_resource type="TileSet" uid="uid://dgi1yfqbk2346" path="res://Scenes/arena/tileset.tres" id="2_p7aap"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://l37k867kkyac" path="res://Scripts/Components/UnitGrid.cs" id="4_ph0kn"]
 [ext_resource type="Script" uid="uid://dlwtbiano3v1s" path="res://Scripts/Components/TileHighlighter.cs" id="6_ae3s7"]
 [ext_resource type="Script" uid="uid://dacmpbydcvao5" path="res://Scripts/Components/UnitMover.cs" id="8_1oecu"]
+[ext_resource type="Resource" uid="uid://8uw5gbmti3v5" path="res://data/units/bjorn_tier2.tres" id="8_86j7x"]
 [ext_resource type="Resource" uid="uid://b2cw3x4we4ml5" path="res://data/units/arthur.tres" id="8_775j4"]
 [ext_resource type="Resource" uid="uid://bgxbrnpo2x8ye" path="res://data/units/robin.tres" id="8_xhvgg"]
 [ext_resource type="Script" uid="uid://dqj8h2j1u5h30" path="res://Scripts/Components/UnitSpawner.cs" id="11_o6u42"]
@@ -110,6 +111,7 @@ tile_set = ExtResource("2_p7aap")
 
 [node name="Unit" parent="Bench" instance=ExtResource("4_cy0gq")]
 position = Vector2(32, -160)
+defaultStats = ExtResource("8_86j7x")
 
 [node name="Unit2" parent="Bench" instance=ExtResource("4_cy0gq")]
 position = Vector2(96, -160)

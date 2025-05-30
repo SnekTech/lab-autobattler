@@ -2,6 +2,7 @@
 using GodotUtilities;
 using LabAutobattler.Components;
 using LabAutobattler.Data.Player;
+using LabAutobattler.Data.Units;
 
 namespace LabAutobattler.UnitManage;
 
@@ -9,16 +10,16 @@ namespace LabAutobattler.UnitManage;
 public partial class SellPortal : Area2D
 {
     [Export]
-    public PlayerStats PlayerStats { get; private set; } = null!;
+    private PlayerStats playerStats = null!;
+    [Export]
+    private UnitPool unitPool = null!;
 
     [Node]
-    private HBoxContainer Gold { get; set; } = null!;
-
+    private HBoxContainer gold = null!;
     [Node]
-    private Label GoldLabel { get; set; } = null!;
-
+    private Label goldLabel = null!;
     [Node]
-    private OutlineHighlighter OutlineHighlighter { get; set; } = null!;
+    private OutlineHighlighter outlineHighlighter = null!;
 
     private Unit? _currentUnit;
 
@@ -59,10 +60,11 @@ public partial class SellPortal : Area2D
 
     private void SellUnit(Unit unit)
     {
-        PlayerStats.Gold += unit.Stats.GoldValue;
+        playerStats.Gold += unit.Stats.GoldValue;
+
         // todo: give items back to item pool
-        // todo: put units back to the pool
-        GD.Print(PlayerStats.Gold);
+
+        unitPool.AddUnit(unit.Stats);
 
         unit.QueueFree();
     }
@@ -73,9 +75,9 @@ public partial class SellPortal : Area2D
             return;
 
         _currentUnit = unit;
-        OutlineHighlighter.Highlight();
-        GoldLabel.Text = unit.Stats.GoldValue.ToString();
-        Gold.Show();
+        outlineHighlighter.Highlight();
+        goldLabel.Text = unit.Stats.GoldValue.ToString();
+        gold.Show();
     }
 
     private void OnAreaExited(Area2D area)
@@ -88,8 +90,8 @@ public partial class SellPortal : Area2D
             _currentUnit = null;
         }
 
-        OutlineHighlighter.ClearHighlight();
-        Gold.Hide();
+        outlineHighlighter.ClearHighlight();
+        gold.Hide();
     }
 
     public override void _Notification(int what)
