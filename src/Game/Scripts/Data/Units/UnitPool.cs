@@ -11,28 +11,28 @@ public partial class UnitPool : Resource
     [Export]
     public Array<UnitStats> AvailableUnits { get; private set; } = [];
 
-    private readonly List<UnitStats> _unitPool = [];
+    private readonly List<UnitStats> _pool = [];
 
-    public void InitUnitPool()
+    public void InitPool()
     {
         foreach (var availableUnit in AvailableUnits)
         {
             for (var i = 0; i < availableUnit.PoolCount; i++)
             {
-                _unitPool.Add(availableUnit);
+                _pool.Add(availableUnit);
             }
         }
     }
 
     public UnitStats? GetRandomUnitByRarity(UnitRarity rarity)
     {
-        var units = _unitPool.Where(unit => unit.Rarity == rarity).ToList();
+        var units = _pool.Where(unit => unit.Rarity == rarity).ToList();
         if (units.Count == 0)
             return null;
 
         var randomIndex = GD.RandRange(0, units.Count - 1);
         var pickedUnit = units[randomIndex];
-        _unitPool.Remove(pickedUnit);
+        _pool.Remove(pickedUnit);
         return pickedUnit;
     }
 
@@ -44,7 +44,12 @@ public partial class UnitPool : Resource
 
         for (var i = 0; i < combinedCount; i++)
         {
-            _unitPool.Add(unit);
+            _pool.Add(unit);
         }
+    }
+
+    public override string ToString()
+    {
+        return string.Join(", ", _pool);
     }
 }

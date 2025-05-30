@@ -38,15 +38,17 @@ public partial class UnitCard : Button
     [Node]
     private Panel EmptyPlaceholder { get; set; } = null!;
 
-    public UnitStats UnitStats
+    public UnitStats? UnitStats
     {
-        get => _unitStats ?? defaultUnitStats;
+        get => _unitStats;
         set
         {
             _unitStats = value;
             UpdateUnit(_unitStats);
         }
     }
+
+    public bool Bought { get; private set; }
 
     private StyleBoxFlat BorderStyle => (StyleBoxFlat)Border.GetThemeStylebox("panel");
     private StyleBoxFlat BottomStyle => (StyleBoxFlat)Bottom.GetThemeStylebox("panel");
@@ -55,11 +57,9 @@ public partial class UnitCard : Button
 
     private UnitStats? _unitStats;
     private Color _borderColor;
-    private bool _bought;
 
     public override void _Ready()
     {
-        UnitStats = defaultUnitStats;
         UpdateWithPlayerStats();
 
         // todo: remove these
@@ -86,8 +86,14 @@ public partial class UnitCard : Button
         MouseExited -= OnMouseExited;
     }
 
-    private void UpdateUnit(UnitStats unitStats)
+    private void UpdateUnit(UnitStats? unitStats)
     {
+        if (unitStats == null)
+        {
+            EmptyPlaceholder.Show();
+            return;
+        }
+
         _borderColor = UnitStats.RarityColors[unitStats.Rarity];
         BorderStyle.BorderColor = _borderColor;
         BottomStyle.BgColor = _borderColor;
@@ -99,10 +105,16 @@ public partial class UnitCard : Button
 
     private void UpdateWithPlayerStats()
     {
+        if (UnitStats == null)
+        {
+            EmptyPlaceholder.Show();
+            return;
+        }
+
         var hasEnoughGold = PlayerStats.Gold >= UnitStats.GoldCost;
         Disabled = hasEnoughGold == false;
 
-        if (hasEnoughGold || _bought)
+        if (hasEnoughGold || Bought)
         {
             this.SetModulateAlpha(1);
         }
@@ -116,11 +128,11 @@ public partial class UnitCard : Button
 
     private void OnPressed()
     {
-        if (_bought)
+        if (Bought || UnitStats == null)
             return;
 
         PlayerStats.Gold -= UnitStats.GoldCost;
-        _bought = true;
+        Bought = true;
         EmptyPlaceholder.Show();
         UnitBought?.Invoke(UnitStats);
     }

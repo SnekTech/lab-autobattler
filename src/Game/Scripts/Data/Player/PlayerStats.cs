@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Godot;
+﻿using Godot;
 using LabAutobattler.Data.Units;
 
 namespace LabAutobattler.Data.Player;
@@ -72,5 +71,5 @@ public partial class PlayerStats : Resource
 
     private int _gold;
     private int _xp;
-    private int _level;
+    private int _level = 1;
 }
