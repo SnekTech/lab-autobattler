@@ -109,14 +109,14 @@ metadata/_edit_group_ = true
 tile_set = ExtResource("2_p7aap")
 
 [node name="Unit" parent="Bench" instance=ExtResource("4_cy0gq")]
-position = Vector2(32, 0)
+position = Vector2(32, -160)
 
 [node name="Unit2" parent="Bench" instance=ExtResource("4_cy0gq")]
-position = Vector2(96, 0)
+position = Vector2(96, -160)
 defaultStats = ExtResource("8_xhvgg")
 
 [node name="Unit3" parent="Bench" instance=ExtResource("4_cy0gq")]
-position = Vector2(64, 0)
+position = Vector2(64, -160)
 defaultStats = ExtResource("8_775j4")
 
 [node name="BenchUnitGrid" type="Node2D" parent="Bench"]
@@ -146,3 +146,4 @@ position = Vector2(80, 288)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Shop" parent="UI" instance=ExtResource("13_fm77b")]
+unique_name_in_owner = true
