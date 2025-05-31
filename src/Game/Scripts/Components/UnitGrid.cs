@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using System.Collections.Generic;
+using System.Text;
 using LabAutobattler.UnitManage;
 
 namespace LabAutobattler.Components;
@@ -13,7 +14,8 @@ public partial class UnitGrid : Node2D
     [Export]
     public Vector2I Size { get; private set; }
 
-    private Godot.Collections.Dictionary<Vector2I, Unit?> _units = [];
+    private readonly Dictionary<Vector2I, Unit?> _units = [];
+    private readonly Dictionary<Vector2I, Action> _unitExitedDelegates = [];
 
     public override void _Ready()
     {
@@ -32,9 +34,11 @@ public partial class UnitGrid : Node2D
         }
     }
 
-    public void AddUnit(Vector2I index, Unit unit)
+    public void AddUnit(Vector2I tile, Unit unit)
     {
-        _units[index] = unit;
+        _units[tile] = unit;
+        _unitExitedDelegates[tile] = () => OnUnitExitedTree(unit, tile);
+        unit.TreeExited += _unitExitedDelegates[tile];
         UnitGridChanged?.Invoke();
     }
 
@@ -44,6 +48,7 @@ public partial class UnitGrid : Node2D
         if (unit == null)
             return;
 
+        unit.TreeExited -= _unitExitedDelegates[tile];
         _units[tile] = null;
         UnitGridChanged?.Invoke();
     }
@@ -67,6 +72,35 @@ public partial class UnitGrid : Node2D
 
     public List<Unit> GetAllUnits()
     {
-        return _units.Values.OfType<Unit>().ToList();
+        return [.._units.Values.OfType<Unit>()];
+    }
+
+    private void OnUnitExitedTree(Unit unit, Vector2I tile)
+    {
+        if (unit.IsQueuedForDeletion() == false)
+            return;
+
+        _units[tile] = null;
+        UnitGridChanged?.Invoke();
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.Append("units dictionary:").AppendLine();
+
+        foreach (var (tile, unit) in _units)
+        {
+            var unitString = unit == null ? "null" : unit.ToString();
+            sb.Append($"[{tile}]: {unitString}, ");
+        }
+
+        sb.AppendLine().Append("----------").AppendLine();
+
+        sb.Append("get all units: ").AppendLine();
+        var units = GetAllUnits();
+        sb.Append('[').Append(string.Join(", ", units)).Append(']').AppendLine();
+
+        return sb.ToString();
     }
 }
